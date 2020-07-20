@@ -4,6 +4,8 @@
 #include <chrono>
 #include <iostream>
 
+#include "./TrieSingleton/singleton.h"
+
 using namespace std;
 
 int main(){
@@ -11,17 +13,27 @@ int main(){
     crow::SimpleApp app;
     crow::mustache::set_base(".");
 
+    loadFileSingleton("./TrieSingleton/english.txt");
+
+
     CROW_ROUTE(app,"/trie").methods("POST"_method)
 	    ([](const crow::request& req)
 	     {
-		std::cout<<"ENTRO A SEARCH ..."<<std::endl;
 		auto q = crow::json::load(req.body);
 		std::string query = q["query"].s();
 		std::cout<<query<<std::endl;
 
-		std::cout<<"SALE A SEARCH ..."<<std::endl;
 		crow::json::wvalue ans;
-		ans["0"] = "203.34";
+
+		std::vector<std::string> suggestions = nFirstSuggestionsSingleton(query, 5);
+
+		crow::json::wvalue data;
+
+		for(auto x: suggestions) {
+			data[x] = "null";
+		}
+
+		ans["data"] = data;
 		return ans;
 		//return crow::response{{"ans":"hola"}};
 	     });
