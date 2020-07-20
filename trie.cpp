@@ -33,7 +33,7 @@ int main(){
 			data[x] = "null";
 		}
 
-		ans["data"] = data;
+		ans["data"] = std::move(data);
 		return ans;
 		//return crow::response{{"ans":"hola"}};
 	     });
