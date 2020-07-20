@@ -30,7 +30,7 @@ int main(){
 		crow::json::wvalue data;
 
 		for(auto x: suggestions) {
-			data[x] = "null";
+			data[x] = "";
 		}
 
 		ans["data"] = std::move(data);

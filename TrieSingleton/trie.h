@@ -87,7 +87,9 @@ vector<string> nFirst(vector<string> vec, int n) {
   std::partial_sort(vec.begin(), vec.begin() + n,vec.end(), [](const std::string& first, const std::string& second){
         return first.size() < second.size();
     });
-  vec.resize(n);
+  if(vec.size() > n){
+  	vec.resize(n);
+  }
   return vec;
 }
 
