@@ -99,7 +99,7 @@ vector<string> getNSuggestions(trieNode *root, const string query, int num) {
     vector<string> result;
       
     for (int i = 0; i < n; i++) {
-        int ind = query[i];
+        char ind = query[i];
 
         if (!crawl->childs[ind])
             return nFirst(result,num);
