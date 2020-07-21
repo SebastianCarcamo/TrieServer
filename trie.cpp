@@ -47,8 +47,8 @@ int main(){
 
 		crow::json::wvalue ans;
 
-		std::vector<std::string> suggestions = correctSingleton(query).resize(10);
-
+		std::vector<std::string> suggestions = correctSingleton(query);
+		suggestions.resize(10);
 		crow::json::wvalue data;
 
 		for(auto x: suggestions) {
