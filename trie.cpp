@@ -47,7 +47,10 @@ int main(){
 
 		crow::json::wvalue ans;
 
-		std::vector<std::string> suggestions = correctSingleton(query).resize(10);
+		std::vector<std::string> suggestions = correctSingleton(query);
+		if(suggestions.size()>10){
+			suggestions.resize(10);
+		}
 
 		crow::json::wvalue data;
 
