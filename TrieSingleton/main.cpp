@@ -25,9 +25,15 @@ int main() {
 	loadFileSingleton("english.txt");
 
 
-  for(string i: correctSingleton("sandwishes")) {
+  for(string i: nFirstSuggestionsSingleton("dinosa",5)) {
     cout<<i<<endl;
   }
+  for(string i : nFirstSuggestionsSingleton("dinos",5)) {
+	  cout<<i<<endl;
+  }
+  for(string i : nFirstSuggestionsSingleton("din",5)) {
+	cout<<i<<endl;
+	}
 
 	// if(i == true) { cout<< "true"<<endl;}
 
