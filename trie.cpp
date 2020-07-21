@@ -63,6 +63,28 @@ int main(){
 		//return crow::response{{"ans":"hola"}};
 	     });
 
+    CROW_ROUTE(app,"/complete").methods("POST"_method)
+	    ([](const crow::request& req)
+	     {
+		auto q = crow::json::load(req.body);
+		std::string query = q["query"].s();
+		std::cout<<query<<std::endl;
+
+		crow::json::wvalue ans;
+
+		std::vector<std::string> suggestions = SuggestThenCorrectSingleton(query);
+
+		crow::json::wvalue data;
+
+		for(auto x: suggestions) {
+			data[x] = "";
+		}
+
+		ans["data"] = std::move(data);
+		return ans;
+		//return crow::response{{"ans":"hola"}};
+	     });
+
     app.port(41080)
 
         //.multithreaded()

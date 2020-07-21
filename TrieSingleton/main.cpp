@@ -25,15 +25,33 @@ int main() {
 	loadFileSingleton("english.txt");
 
 
-  for(string i: nFirstSuggestionsSingleton("dinosa",5)) {
+ //  for(string i: nFirstSuggestionsSingleton("dinosa",5)) {
+ //    cout<<i<<endl;
+ //  }
+ //  for(string i : nFirstSuggestionsSingleton("dinos",5)) {
+	//   cout<<i<<endl;
+ //  }
+ //  for(string i : nFirstSuggestionsSingleton("din",5)) {
+	// cout<<i<<endl;
+	// }
+
+
+
+  for(string i: SuggestThenCorrectSingleton("dins")) {
     cout<<i<<endl;
   }
-  for(string i : nFirstSuggestionsSingleton("dinos",5)) {
-	  cout<<i<<endl;
+
+  for(string i: SuggestThenCorrectSingleton("dinosaur")) {
+    cout<<i<<endl;
   }
-  for(string i : nFirstSuggestionsSingleton("din",5)) {
-	cout<<i<<endl;
-	}
+
+  for(string i: SuggestThenCorrectSingleton("anarchy")) {
+    cout<<i<<endl;
+  }
+
+  // for(string i: correctSingleton("dins")) {
+  //   cout<<i<<endl;
+  // }
 
 	// if(i == true) { cout<< "true"<<endl;}
 

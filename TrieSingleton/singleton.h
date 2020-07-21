@@ -64,3 +64,26 @@ vector<string> correctSingleton(string query) {
 	TrieSingleton* s = TrieSingleton::GetInstance();
 	return correct(s->root, query);
 }
+
+vector<string> SuggestThenCorrectSingleton(string query) {
+	TrieSingleton* s = TrieSingleton::GetInstance();
+	vector<string> result = getNSuggestions(s->root, query, 5);
+	if(result.size()<5) {
+		vector<string> corrects = correct(s->root, query);
+
+		int dif = 5-result.size();
+
+		if(corrects.size()>5-result.size() ) {
+			for(int i =0; i<dif;i++) {
+				result.push_back(corrects[i]);
+			}
+
+		} else {
+			result.insert( result.end() , corrects.begin(), corrects.end());
+
+		}
+	}
+	
+	return result;
+
+}
