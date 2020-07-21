@@ -16,7 +16,7 @@ int main(){
     loadFileSingleton("./TrieSingleton/english.txt");
 
 
-    CROW_ROUTE(app,"/trie").methods("POST"_method)
+    CROW_ROUTE(app,"/suggest").methods("POST"_method)
 	    ([](const crow::request& req)
 	     {
 		auto q = crow::json::load(req.body);
@@ -38,7 +38,28 @@ int main(){
 		//return crow::response{{"ans":"hola"}};
 	     });
 
-		    
+    CROW_ROUTE(app,"/correct").methods("POST"_method)
+	    ([](const crow::request& req)
+	     {
+		auto q = crow::json::load(req.body);
+		std::string query = q["query"].s();
+		std::cout<<query<<std::endl;
+
+		crow::json::wvalue ans;
+
+		std::vector<std::string> suggestions = correctSingleton(query).resize(10);
+
+		crow::json::wvalue data;
+
+		for(auto x: suggestions) {
+			data[x] = "";
+		}
+
+		ans["data"] = std::move(data);
+		return ans;
+		//return crow::response{{"ans":"hola"}};
+	     });
+
 
     app.port(41080)
         //.multithreaded()
